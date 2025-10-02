@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invitación XV - Analia Pintos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="invite-card">
+    <div class="frame">
+      <div class="crown">
+        <svg class="crown-shape" viewBox="0 0 64 36" aria-hidden="true">
+          <path d="M2 30 L10 8 L20 28 L30 6 L38 28 L48 8 L56 30 Z" fill="#BFA36A"/>
+        </svg>
+        <button id="playBtn" class="play-btn" aria-label="Ver video">
+          <svg viewBox="0 0 24 24" class="play-icon" aria-hidden="true">
+            <path d="M8 5v14l11-7z" fill="#ffffff"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="content">
+        <div class="left-illustration">
+          <img src="girl-illustration.png" alt="Ilustración quinceañera" />
+        </div>
+
+        <div class="text-area">
+          <h1 class="heading-italic">El bosque encantado abrirá sus puertas solo por una noche… ¡la mía!</h1>
+
+          <p class="lead">
+            Ven a festejar mis 15 años en una noche de música, magia y mucha diversión.
+          </p>
+
+          <div class="for-debutante">
+            <span class="debutante">Analia Pintos</span>
+          </div>
+
+          <div class="details">
+            <p><strong>Fecha:</strong> 15 de noviembre de 2025</p>
+            <p><strong>Lugar:</strong> Capital Miranda, Itapúa</p>
+            <p><strong>Hora:</strong> 19:30</p>
+          </div>
+
+          <div class="actions">
+            <a class="rsvp-btn" id="whatsappBtn" href="https://wa.me/595975707453?text=Confirmo%20asistencia%20a%20los%20XV%20de%20Analia%20Pintos" target="_blank" rel="noopener noreferrer" aria-label="Confirmar por WhatsApp">
+              Confirmar asistencia
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <footer class="card-footer">
+        <small class="foot-note">Se ruega confirmar asistencia</small>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Modal video -->
+  <div id="videoModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="closeModal" class="close">✕</button>
+      <div class="video-wrap">
+        <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
