@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analia Pintos — 15 años</title>
+
+  <!--
+    Invitación inspirada en "La Princesa y el Sapo"
+    - Paleta suave: crema, verde menta claro, dorado suave, lila/rosa pálido
+    - Mobile-first: unidades relativas, media queries para escritorio
+    - CSS integrado abajo en <style>
+    - Ilustraciones: SVG integrados con estilo acuarela/sutileza
+  -->
+  <style>
+    /* ==========================
+       Variables de diseño
+       ========================== */
+    :root{
+      --cream: #F7F2EA;
+      --mint: #CFEDE2;
+      --mint-dark: #7FBFA8;
+      --gold: #D4B570;
+      --lilac: #F3E6F1;
+      --text-dark: #21302B;
+      --card-radius: 14px;
+      --pad: 5vw;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* ==========================
+       Reset y base mobile-first
+       ========================== */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(127,191,168,0.06), transparent 6%),
+        radial-gradient(circle at 90% 85%, rgba(243,230,241,0.04), transparent 6%),
+        var(--cream);
+      color:var(--text-dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6vh var(--pad);
+      line-height:1.45;
+    }
+
+    /* ==========================
+       Contenedor principal (tarjeta)
+       ========================== */
+    .card{
+      width:100%;
+      max-width:980px;
+      border-radius:var(--card-radius);
+      overflow:hidden;
+      box-shadow: 0 18px 40px rgba(33,48,43,0.08);
+      display:grid;
+      grid-template-columns:1fr;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+    }
+
+    /* ==========================
+       Área hero (nombre + frase + acuarela)
+       Mobile-first: ocupa la parte superior
+       ========================== */
+    .hero{
+      background:
+        linear-gradient(135deg, rgba(207,237,226,0.96), rgba(243,230,241,0.90));
+      padding:6.2vw;
+      min-height:46vw;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      gap:0.5rem;
+    }
+
+    /* Nombre principal en caligrafía elegante */
+    .name{
+      margin:0;
+      font-family:var(--serif);
+      font-weight:700;
+      font-size:clamp(1.7rem,6.6vw,3.2rem);
+      color:var(--text-dark);
+      letter-spacing:0.01em;
+      text-shadow: 0 2px 0 rgba(255,255,255,0.25);
+    }
+
+    .phrase{
+      margin:0;
+      font-family:var(--serif);
+      font-size:clamp(0.95rem,3.2vw,1.25rem);
+      color:rgba(33,48,43,0.92);
+      opacity:0.98;
+    }
+
+    /* Sutileza acuarela: overlay de textura (simulada) */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(217,233,224,0.12), transparent 6%),
+        radial-gradient(circle at 80% 80%, rgba(243,228,241,0.08), transparent 8%);
+      pointer-events:none;
+    }
+
+    /* Ilustración acuarelada en esquina (SVG inline) */
+    .hero .illustration{
+      position:absolute;
+      right:4.5vw;
+      bottom:4.5vw;
+      width:26vw;
+      max-width:170px;
+      opacity:0.95;
+      filter: drop-shadow(0 6px 18px rgba(33,48,43,0.08));
+      pointer-events:none;
+    }
+
+    /* ==========================
+       Contenido (datos, countdown, dress code, CTA)
+       ========================== */
+    .content{
+      padding:5.6vw;
+      display:flex;
+      flex-direction:column;
+      gap:0.9rem;
+      background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,242,234,0.98));
+    }
+
+    .lead{
+      margin:0;
+      font-family:var(--serif);
+      color:var(--mint-dark);
+      font-size:1.02rem;
+    }
+
+    .desc{
+      margin:0;
+      color:var(--text-dark);
+      font-size:0.98rem;
+    }
+
+    .meta{
+      display:flex;
+      flex-direction:column;
+      gap:0.5rem;
+      margin-top:0.2rem;
+    }
+
+    .meta .row{
+      display:flex;
+      gap:0.6rem;
+      align-items:center;
+      font-size:0.95rem;
+      color:var(--text-dark);
+    }
+
+    .meta .icon{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--gold);
+      flex:0 0 auto;
+      box-shadow:0 2px 6px rgba(212,181,112,0.12);
+    }
+
+    /* ==========================
+       Cuenta regresiva: estilo acuarela, tipografía serif
+       ========================== */
+    .countdown{
+      margin-top:0.4rem;
+      display:flex;
+      gap:0.6rem;
+      align-items:center;
+      background: linear-gradient(90deg, rgba(127,191,168,0.06), rgba(243,230,241,0.04));
+      padding:0.5rem 0.6rem;
+      border-radius:10px;
+      font-family:var(--serif);
+      color:var(--mint-dark);
+      font-size:0.95rem;
+    }
+
+    .countdown .block{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-width:3.6rem;
+    }
+
+    .countdown .num{
+      font-weight:700;
+      color:var(--text-dark);
+      font-size:1.05rem;
+      min-width:2.2ch;
+      text-align:center;
+      font-variant-numeric:tabular-nums;
+    }
+
+    .countdown .label{
+      font-size:0.72rem;
+      color:rgba(33,48,43,0.7);
+    }
+
+    /* ==========================
+       Dress code con iconos (corbata + vestido)
+       ========================== */
+    .dress{
+      display:flex;
+      gap:0.6rem;
+      align-items:center;
+      margin-top:0.4rem;
+      flex-wrap:wrap;
+    }
+
+    .dress .card{
+      display:flex;
+      gap:0.6rem;
+      align-items:center;
+      padding:0.5rem 0.6rem;
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(243,230,241,0.6));
+      border:1px solid rgba(127,191,168,0.08);
+      font-size:0.94rem;
+      color:var(--text-dark);
+    }
+
+    .dress svg{width:34px;height:34px;flex:0 0 auto;opacity:0.95}
+
+    /* ==========================
+       CTA: Confirmar Asistencia (WhatsApp)
+       ========================== */
+    .actions{
+      margin-top:0.8rem;
+      display:flex;
+      gap:0.6rem;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:0.6rem;
+      padding:0.62rem 1rem;
+      border-radius:12px;
+      font-weight:700;
+      font-size:0.98rem;
+      text-decoration:none;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+
+    .btn-primary{
+      background: linear-gradient(90deg, rgba(204,181,118,0.95), rgba(223,196,130,0.95));
+      color:var(--text-dark);
+      box-shadow:0 10px 28px rgba(33,48,43,0.08);
+    }
+
+    .btn-ghost{
+      background:transparent;
+      color:var(--mint-dark);
+      border:1px solid rgba(127,191,168,0.12);
+    }
+
+    .btn:active{transform:translateY(1px)}
+    .btn:focus{outline:3px solid rgba(212,181,112,0.16);outline-offset:2px}
+
+    /* ==========================
+       Footer / nota
+       ========================== */
+    .note{
+      margin-top:0.6rem;
+      font-size:0.86rem;
+      color:rgba(33,48,43,0.66);
+    }
+
+    /* ==========================
+       Desktop layout adjustments
+       ========================== */
+    @media (min-width:880px){
+      .card{grid-template-columns:48% 52%}
+      .hero{padding:7.5% 8% 7% 8%; min-height:unset; align-items:flex-end}
+      .hero .illustration{width:220px; right:6%; bottom:6%}
+      .content{padding:6.5% 7%}
+    }
+
+    @media (min-width:1200px){
+      :root{--pad:6vw}
+      .name{font-size:3.8rem}
+    }
+
+    /* ==========================
+       Accesibilidad mínima
+       ========================== */
+    .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    Estructura del documento:
+    - .card: contenedor principal
+    - .hero: nombre + frase + ilustración acuarela (SVG)
+    - .content: texto de invitación, fecha, lugar, countdown, dress code, CTA
+  -->
+  <main class="card" role="article" aria-labelledby="title">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="title" role="region">
+      <h1 id="title" class="name">Analia Pintos</h1>
+      <p class="phrase">El bosque encantado abrirá sus puertas solo por una noche… ¡la mía!</p>
+
+      <!-- Ilustración acuarela sutil (SVG inline, estilo pincel, lirios, luciérnagas) -->
+      <svg class="illustration" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <!-- Fondo acuarela suave (manchas) -->
+        <defs>
+          <radialGradient id="g1" cx="20%" cy="20%">
+            <stop offset="0%" stop-color="#CFEDE2" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="g2" cx="80%" cy="80%">
+            <stop offset="0%" stop-color="#F3E6F1" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="paper" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+            <feColorMatrix type="saturate" values="0.02"/>
+            <feBlend mode="multiply"/>
+          </filter>
+        </defs>
+
+        <g filter="url(#paper)" opacity="0.95">
+          <ellipse cx="70" cy="70" rx="70" ry="40" fill="url(#g1)" />
+          <ellipse cx="190" cy="170" rx="70" ry="42" fill="url(#g2)" />
+        </g>
+
+        <!-- Lirio y hojas (estilo acuarela simplificado) -->
+        <g transform="translate(14,30) scale(0.9)">
+          <path d="M80 150 C55 120, 45 90, 80 78 C106 69, 130 86, 146 104 C160 120, 138 150, 98 150 Z"
+                fill="#7FBFA8" opacity="0.85"/>
+          <path d="M120 110 C130 90, 160 84, 176 96 C190 106, 178 124, 152 126 C136 127,122 120,120 110 Z"
+                fill="#CFEDE2" opacity="0.9"/>
+          <path d="M88 88 C95 76, 112 68, 126 76 C118 86,102 92,88 88 Z" fill="#D4B570" opacity="0.9"/>
+        </g>
+
+        <!-- Luciérnagas (puntos luminosos) -->
+        <g fill="#FFDFAF" opacity="0.95">
+          <circle cx="36" cy="20" r="2.6"/>
+          <circle cx="220" cy="38" r="2.2"/>
+          <circle cx="198" cy="88" r="1.8"/>
+          <circle cx="46" cy="120" r="1.6"/>
+        </g>
+
+        <!-- Silueta minimal de Tiana (estilizada, no detallada) como homenaje suave -->
+        <g transform="translate(28,46) scale(0.78)" opacity="0.92">
+          <path d="M110 10 C125 24, 140 52, 132 78 C118 120, 90 140, 72 140 C58 140,44 120,38 90 C32 60,48 30,72 18 C90 8,104 4,110 10 Z"
+                fill="#7FBFA8" opacity="0.45"/>
+          <circle cx="106" cy="18" r="4" fill="#D4B570" opacity="0.9"/>
+        </g>
+      </svg>
+    </section>
+
+    <!-- CONTENIDO -->
+    <section class="content" role="region" aria-labelledby="sub-title">
+      <h2 id="sub-title" class="lead">Ven a festejar mis 15 años en una noche de música, magia y mucha diversión.</h2>
+
+      <p class="desc">Te espero el <strong>15 de noviembre del 2025</strong> en el <strong>Salón Parroquial Capitán Miranda, Itapúa</strong>.</p>
+
+      <div class="meta" aria-hidden="false">
+        <div class="row"><span class="icon" aria-hidden="true"></span><span><strong>Fecha</strong>: 15 de noviembre del 2025</span></div>
+        <div class="row"><span class="icon" aria-hidden="true"></span><span><strong>Lugar</strong>: Salón Parroquial Capitán Miranda, Itapúa</span></div>
+      </div>
+
+      <!-- Cuenta regresiva -->
+      <div class="countdown" aria-live="polite" aria-atomic="true" title="Cuenta regresiva hacia el evento">
+        <div class="block" aria-hidden="false">
+          <div id="cd-days" class="num">--</div>
+          <div class="label">Días</div>
+        </div>
+        <div class="block">
+          <div id="cd-hours" class="num">--</div>
+          <div class="label">Horas</div>
+        </div>
+        <div class="block">
+          <div id="cd-mins" class="num">--</div>
+          <div class="label">Minutos</div>
+        </div>
+      </div>
+
+      <!-- Dress code con dos pequeñas ilustraciones SVG (corbata y vestido) -->
+      <div class="dress" aria-hidden="false">
+        <div class="card" aria-label="Código de vestimenta">
+          <!-- Icono corbata (acuarela simplificada) -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M32 6 L38 18 L54 22 L38 30 L32 44 L26 30 L10 22 L26 18 Z" fill="#7FBFA8" opacity="0.95"/>
+            <rect x="28" y="44" width="8" height="12" rx="3" fill="#CFEDE2" opacity="0.9"/>
+          </svg>
+          <div>
+            <div style="font-size:0.88rem;color:rgba(33,48,43,0.75)">Código de Vestimenta</div>
+            <div style="font-weight:700;color:var(--text-dark)">Sport Elegante</div>
+          </div>
+          <!-- Icono vestido (pequeño) -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="margin-left:auto">
+            <path d="M20 8 C28 12,36 12,44 8 L52 24 C44 28,34 40,32 50 C30 40,20 28,12 24 Z" fill="#D4B570" opacity="0.92"/>
+            <path d="M24 10 C28 14,36 14,40 10 L34 24 C32 28,28 28,26 24 Z" fill="#CFEDE2" opacity="0.9"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Acciones: Confirmar asistencia -->
+      <div class="actions" role="group" aria-label="Confirmar asistencia">
+        <!-- WhatsApp: wa.me con mensaje preescrito (URL codificada) -->
+        <a id="rsvp" class="btn btn-primary"
+           href="https://wa.me/595975707453?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20los%2015%20anos%20de%20Analia."
+           target="_blank" rel="noopener noreferrer">
+          Confirmar Asistencia
+        </a>
+
+        <a class="btn btn-ghost" href="#details" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'}); return false;">
+          Ver detalles
+        </a>
+      </div>
+
+      <p id="details" class="note">
+        Hora exacta y protocolo se confirmarán por mensaje privado. Por favor confirma tu asistencia con anticipación.
+      </p>
+      <p class="sr-only" id="event-iso">2025-11-15T20:00:00</p>
+    </section>
+  </main>
+
+  <!-- ==========================
+       JavaScript: Cuenta regresiva y comportamiento RSVP
+       ========================== -->
+  <script>
+    /*
+      Cuenta regresiva hacia 15 de noviembre de 2025, 20:00 (hora local)
+      - Mobile-first: actualiza cada 20s para balancear consumo
+      - Muestra días, horas y minutos
+      - Si ya pasó, muestra ceros y detiene el intervalo
+    */
+    (function(){
+      // Fecha objetivo (mes: 10 => noviembre)
+      const target = new Date(2025, 10, 15, 20, 0, 0);
+
+      const elDays = document.getElementById('cd-days');
+      const elHours = document.getElementById('cd-hours');
+      const elMins = document.getElementById('cd-mins');
+
+      function pad(v){ return String(v).padStart(2,'0'); }
+
+      function calc(){
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        if (diff <= 0){
+          elDays.textContent = '00';
+          elHours.textContent = '00';
+          elMins.textContent = '00';
+          clearInterval(timer);
+          return;
+        }
+
+        const minsTotal = Math.floor(diff / (1000 * 60));
+        const days = Math.floor(minsTotal / (60 * 24));
+        const hours = Math.floor((minsTotal - days * 24 * 60) / 60);
+        const mins = Math.floor(minsTotal % 60);
+
+        elDays.textContent = String(days);
+        elHours.textContent = pad(hours);
+        elMins.textContent = pad(mins);
+      }
+
+      calc();
+      const timer = setInterval(calc, 20000);
+
+      // Si vuelve de background, recalcula inmediatamente
+      document.addEventListener('visibilitychange', function(){
+        if (!document.hidden) calc();
+      });
+
+      // Mejora de accesibilidad: anunciar cuando falta menos de un día
+      let announced = false;
+      setInterval(function(){
+        const now = new Date();
+        if (!announced && target - now < 1000*60*60*24 && target - now > 0){
+          const countdown = document.querySelecto  
+
+
+r('.countdown');
+          if (countdown) countdown.setAttribute('aria-live','assertive');
+          announced = true;
+        }
+      }, 60000);
+
+      /* RSVP: se usa el enlace directo en el HTML (wa.me). No es necesario JS extra, 
+         pero dejamos un handler para analytics o confirmación visual si se desea. */
+      const rsvp = document.getElementById('rsvp');
+      if (rsvp){
+        rsvp.addEventListener('click', function(){
+          // Acción mínima: el enlace abre WhatsApp en nueva pestaña
+          // Aquí se podría añadir evento de analytics sin bloquear la navegación
+          try{ if (window.ga) window.ga('send','event','RSVP','click','analia-15'); } catch(e){}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
