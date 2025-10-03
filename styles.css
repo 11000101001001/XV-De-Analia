@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background-color: #f5f5e9;
+}
+
+.invitation-container {
+  position: relative;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  overflow: hidden;
+  text-align: center;
+  color: #2f4f4f;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+/* Decoraciones superiores */
+.top-decor {
+  position: relative;
+  margin-top: 20px;
+}
+
+.crown {
+  width: 80px;
+  margin: auto;
+  display: block;
+}
+
+.flower-left, .flower-right {
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+.flower-left {
+  left: 10%;
+}
+
+.flower-right {
+  right: 10%;
+}
+
+/* Texto */
+.text-section {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.intro {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.invitation {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5rem;
+  color: #2e8b57;
+  margin: 0;
+}
+
+.name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: #2e8b57;
+  margin: 0;
+}
+
+/* Princesa */
+.princess {
+  position: absolute;
+  left: -10px;
+  bottom: 100px;
+  width: 150px;
+  z-index: 1;
+}
+
+/* Cuenta regresiva */
+.countdown {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 20px 0;
+}
+
+/* Detalles del evento */
+.event-details {
+  border: 2px solid #d4af37;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: rgba(255, 255, 240, 0.8);
+  margin: 10px 20px;
+  font-size: 1rem;
+}
+
+/* Botón */
+.confirm-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(to right, #2e8b57, #f5f5dc);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.confirm-button:hover {
+  transform: scale(1.05);
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .princess {
+    width: 100px;
+    bottom: 80px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .event-details {
+    font-size: 0.9rem;
+  }
+}
